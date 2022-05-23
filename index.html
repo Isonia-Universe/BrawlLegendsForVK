@@ -83,8 +83,8 @@
         // and default/override low DPI mode on mobile browsers.
         config.devicePixelRatio = 1;
       } else {
-        canvas.style.width = "99vw";
-        canvas.style.height = "99vh";
+        canvas.style.width = "100vw";
+        canvas.style.height = "100vh";
       }
       loadingBar.style.display = "block";
 
@@ -94,7 +94,6 @@
         createUnityInstance(canvas, config, (progress) => {
           progressBarFull.style.width = 100 * progress + "%";
         }).then((unityInstance) => {
-          newInstance = unityInstance;
           loadingBar.style.display = "none";
           fullscreenButton.onclick = () => {
             unityInstance.SetFullscreen(1);
@@ -105,23 +104,21 @@
       };
       document.body.appendChild(script);
     </script>
-     </script>
-
      <script>
-        vkBridge.send('VKWebAppInit');
-        function showFullscrenAd() {
-        vkBridge.send('VKWebAppShowNativeAds',{ad_format:"interstitial"}).then(data => {
-          newInstance.SendMessage('VKSDK', 'OnInterstitialShown');});
-       }
-     </script>
-     
-     <script>
-       function showRewardedAd(id) {
-        vkBridge.send('VKWebAppShowNativeAds',{ad_format:"reward"}).then(data => {
-          newInstance.SendMessage('VKSDK', 'OnRewarded', id);
-          newInstance.SendMessage('VKSDK', 'OnRewardedClose', id);
-        })
-       }
-     </script>
+      vkBridge.send('VKWebAppInit');
+      function showFullscrenAd() {
+      vkBridge.send('VKWebAppShowNativeAds',{ad_format:"interstitial"}).then(data => {
+        newInstance.SendMessage('VKSDK', 'OnInterstitialShown');});
+     }
+   </script>
+   
+   <script>
+     function showRewardedAd(id) {
+      vkBridge.send('VKWebAppShowNativeAds',{ad_format:"reward"}).then(data => {
+        newInstance.SendMessage('VKSDK', 'OnRewarded', id);
+        newInstance.SendMessage('VKSDK', 'OnRewardedClose', id);
+      })
+     }
+   </script>
   </body>
 </html>

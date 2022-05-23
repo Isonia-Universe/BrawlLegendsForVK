@@ -119,6 +119,7 @@
        function showRewardedAd(id) {
         vkBridge.send('VKWebAppShowNativeAds',{ad_format:"reward"}).then(data => {
           newInstance.SendMessage('VKSDK', 'OnRewarded', id);
+          newInstance.SendMessage('VKSDK', 'OnRewardedClose', id);
         })
        }
      </script>
